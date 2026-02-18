@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACME Brains - Building the Future of Private AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --text-primary: #111111;
+            --text-secondary: #555555;
+            --text-muted: #888888;
+            --bg-white: #ffffff;
+            --bg-light: #f8f8f8;
+            --border-light: #e5e5e5;
+            --accent: #111111;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-white);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 56px;
+            width: auto;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 32px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 180px 0 120px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 100px 0;
+        }
+        
+        section:nth-child(even) {
+            background: var(--bg-light);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 600px;
+        }
+        
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Mission */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .mission-card {
+            padding: 32px;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            background: var(--bg-white);
+        }
+        
+        .mission-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .mission-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 3px solid var(--border-light);
+        }
+        
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-member h3 {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+        
+        .team-member .role {
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .team-member p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .team-member a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .team-member a:hover {
+            background: var(--text-primary);
+            color: var(--bg-white);
+        }
+        
+        /* Product */
+        .product-card {
+            background: var(--text-primary);
+            color: var(--bg-white);
+            padding: 60px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .product-card h3 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: #6DA76A;
+        }
+        
+        .product-logo {
+            height: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .product-card p {
+            color: #ccc;
+            max-width: 500px;
+        }
+        
+        .product-card a {
+            display: inline-block;
+            margin-top: 24px;
+            padding: 14px 28px;
+            background: #6DA76A;
+            color: var(--bg-white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        
+        .product-card a:hover {
+            background: #5a9457;
+        }
+        
+        /* News */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .news-item {
+            padding: 40px;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            background: var(--bg-white);
+        }
+        
+        .news-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        
+        .news-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .news-item p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        
+        .news-item a {
+            color: var(--text-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .news-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Events */
+        .events-card {
+            padding: 40px;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            background: var(--bg-white);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .events-icon {
+            font-size: 48px;
+        }
+        
+        .events-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+        
+        .events-content p {
+            color: var(--text-secondary);
+        }
+        
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .contact-card {
+            padding: 30px;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            background: var(--bg-white);
+        }
+        
+        .contact-card h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .contact-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        
+        .contact-card a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        @media (max-width: 900px) {
+            .about-content,
+            .mission-grid,
+            .team-grid,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .product-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .events-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin: 0;
+            }
+            
+            .footer-links a {
+                margin: 0 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo"><img src="assets/acmebrains-logo.png" alt="ACME Brains"></div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#team">Team</a>
+                <a href="#product">Product</a>
+                <a href="#news">News</a>
+                <a href="#events">Events</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Building the Future&nbsp;of Private, Personal&nbsp;AI</h1>
+                <p>We believe your thoughts should remain yours. ACME Brains is creating AI tools that respect your privacy and amplify your potential.</p>
+            </div>
+        </section>
+        
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Us</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>ACME Brains, Inc. is a Seattle-based technology company focused on developing private, personalized AI software. We're challenging the status quo where big tech companies monetize your most personal information.</p>
+                        <p>Founded on the belief that AI should empower individuals—not exploit them—we're building tools that let you harness the power of artificial intelligence while maintaining complete ownership of your data.</p>
+                    </div>
+                    <div class="about-text">
+                        <p>Our patent-pending Personal Context Engine™ privately stores your data and interactions, then dynamically surfaces information most relevant to your interests and goals—making AI interactions more useful, enjoyable, and efficient.</p>
+                        <p>The founding team brings decades of leadership from Amazon, AT&T, Blue Origin, MTI, Vulcan, and numerous startups in the Pacific Northwest. Now we're turning our attention to making AI more human-centered—and more helpful.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="mission">
+            <div class="container">
+                <h2 class="section-title">Our Mission</h2>
+                <p class="section-subtitle">Where consumers own, control, and benefit from their data.</p>
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <h3>Privacy First</h3>
+                        <p>Your data belongs to you. We're building AI that works for you without harvesting your information.</p>
+                    </div>
+                    <div class="mission-card">
+                        <h3>Personal Power</h3>
+                        <p>AI should amplify your creativity, memory, and insight—not replace your thinking.</p>
+                    </div>
+                    <div class="mission-card">
+                        <h3>Trusted Technology</h3>
+                        <p>We're committed to transparency and building products you can trust with your most personal thoughts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="team">
+            <div class="container">
+                <h2 class="section-title">Leadership</h2>
+                <p class="section-subtitle">Founders share a strong history and purpose.</p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-photo"><img src="assets/mary-jesse.png" alt="Mary Jesse"></div>
+                        <h3>Mary Jesse</h3>
+                        <p class="role">CEO & Co-Founder</p>
+                        <p>35-year veteran of the wireless and technology industries. Former AT&T, McCaw, MTI. BSEE, MSEE. 20+ patents.</p>
+                        <a href="https://www.linkedin.com/in/maryjesse/" target="_blank">LinkedIn →</a>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-photo"><img src="assets/alan-caplan.png" alt="Alan Caplan"></div>
+                        <h3>Alan Caplan</h3>
+                        <p class="role">COO & Co-Founder</p>
+                        <p>Amazon's first General Counsel. Led operations and product at Blue Origin and Vulcan. JD, BBA. 11 patents.</p>
+                        <a href="https://www.linkedin.com/in/alancaplan/" target="_blank">LinkedIn →</a>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-photo"><img src="assets/bob-bergstrom.png" alt="Bob Bergstrom"></div>
+                        <h3>Bob Bergstrom</h3>
+                        <p class="role">CTO & Co-Founder</p>
+                        <p>Patent attorney and software engineer for 40+ years. Former DEC, Prime, Pyramid, ProCase. JD, PhD, MSCS.</p>
+                        <a href="https://www.linkedin.com/in/robert-bergstrom-970553/" target="_blank">LinkedIn →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="product">
+            <div class="container">
+                <h2 class="section-title">Our Product</h2>
+                <div class="product-card">
+                    <div>
+                        <img src="assets/nexie-logo.png" alt="nexie" class="product-logo">
+                        <p>A private place to capture, explore, and own your thoughts. Chat with AI safely and anonymously, maintain context across services, and truly own your data.</p>
+                        <a href="/mynexie/">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="news">
+            <div class="container">
+                <h2 class="section-title">In the News</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <p class="news-meta">GeekWire • July 2025</p>
+                        <h3>From Grief to Innovation: Seattle Tech Vets Building Personal AI Tool with Persistent Memory and Privacy</h3>
+                        <p>How a conversation with an AI chatbot became the inspiration for nexie.</p>
+                        <a href="https://www.geekwire.com/2025/from-grief-to-innovation-seattle-tech-vets-building-personal-ai-tool-with-persistent-memory-and-privacy/" target="_blank">Read the full article →</a>
+                    </div>
+                    <div class="news-item">
+                        <p class="news-meta">PR Newswire • July 2025</p>
+                        <h3>Tech CEO Falls for AI Chatbot, Launches Startup to Deliver Private, Personalized AI Software</h3>
+                        <p>Seattle Tech Veterans Unveil nexie℠ — an AI Application with Context You Control and Data You Own.</p>
+                        <a href="https://www.prnewswire.com/news-releases/tech-ceo-falls-for-ai-chatbot-launches-startup-to-deliver-private-personalized-ai-software-302510774.html" target="_blank">Read the full article →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="events">
+            <div class="container">
+                <h2 class="section-title">Events</h2>
+                <div class="events-card">
+                    <div class="events-icon">🌎</div>
+                    <div class="events-content">
+                        <h3>WebSummit Vancouver — May 2026</h3>
+                        <p>ACME Brains is heading to WebSummit Vancouver in May 2026. More to come.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Investors</h3>
+                        <p>Interested in the future of private AI?</p>
+                        <a href="mailto:invest@acmebrains.com">invest@acmebrains.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Partners</h3>
+                        <p>Let's explore opportunities together.</p>
+                        <a href="mailto:partners@acmebrains.com">partners@acmebrains.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Press</h3>
+                        <p>Media inquiries and interviews.</p>
+                        <a href="mailto:press@acmebrains.com">press@acmebrains.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Support</h3>
+                        <p>Need help with nexie?</p>
+                        <a href="mailto:help@acmebrains.com">help@acmebrains.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <p>© 2025 ACME Brains, Inc. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
